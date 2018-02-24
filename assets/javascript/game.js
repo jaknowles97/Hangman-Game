@@ -20,6 +20,7 @@ lettersRemaining = currentWord.length;
 
 document.onkeyup = function(event){
     letterSelected = event.key;
+    keyHistory = answerKey;
         //check to see if char is part of current word
     for(var j = 0; j < currentWord.length; j++) {
         if(currentWord[j] === letterSelected) {
@@ -31,6 +32,18 @@ document.onkeyup = function(event){
         graveyard.push(letterSelected);
     } else {
         letterSelected = "already used letter";
+    }
+    if( keyHistory === answerKey) {
+        lives--;
+    }
+    if(lettersRemaining <= 0 && lives > 0) {
+        alert("You won! The coreect word was: " + currentWord); 
+    }else if (lives <= 0) {
+        alert("ya lost. the correct word was: " + currentWord);
+    }
+    
+    if(lives <= 0){
+        
     }
 
     var html =
