@@ -6,7 +6,7 @@
  let lives = 10;
  let letterSelected = "";
 
-function startGame() {
+ function startGame() {
     letterSelected = "";
     graveyard.length = 0;
     answerKey.length = 0;
@@ -49,9 +49,7 @@ function updateGame() {
         document.querySelector("#game").innerHTML = winHtml;
     } else {
         var updateHtml =
-        "<h2> press a key to choose a letter </h2>" +
         "<h3>word: " + answerKey.join(" ")  + "</p>" +
-        "<h3>letterSelected: " + letterSelected + "</p>" +
         "<h3>graveyard: " + graveyard + "</p>" +
         "<h3>lives: " + lives + "</h3>";
         document.querySelector("#game").innerHTML = updateHtml;
@@ -66,7 +64,7 @@ document.onkeyup = function(event){
     var keyHistory;
         //check to see if char is part of current word
     for(var j = 0; j < currentWord.length; j++) {
-        if(currentWord[j] === letterSelected) {
+        if(currentWord[j] == letterSelected) {
             answerKey[j] = letterSelected;
             lettersRemaining--;
             keyHistory = answerKey;
@@ -82,3 +80,51 @@ document.onkeyup = function(event){
     }
     updateGame();
 };
+
+
+const alphabet = () => {
+    let letterHTML = "";
+    const letterArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        // LetterClicked is defined here for easy ref.
+        const letterClicked = () => {
+            console.log(this.id);
+        }
+    letterArr.forEach(letter => {
+        const letterString = letter.toString();
+        const letterBtn = document.createElement("button");
+        letterBtn.innerHTML = letter;
+        letterBtn.setAttribute("id", letter);
+        letterBtn.setAttribute("class", "btn btn-btn letter-btn");
+        document.querySelector("#btns").appendChild(letterBtn);
+        letterBtn.addEventListener("click", function() {
+            letterSelected = this.id;
+            console.log(this.id);
+        })
+    })
+
+}
+alphabet();
+
+
+
+// letterBtn.addEventListener("click", function() {
+//     letterSelected = this.id;
+//     var keyHistory;
+//     //check to see if char is part of current word
+//     for(var j = 0; j < currentWord.length; j++) {
+//         if(currentWord[j] == letterSelected) {
+//             answerKey[j] = letterSelected;
+//             lettersRemaining--;
+//             keyHistory = answerKey;
+//         }
+//     }
+//     if( graveyard.indexOf(letterSelected) < 0)   {
+//         graveyard.push(letterSelected);
+//     } else {
+//         letterSelected = "already used letter";
+//     }
+//     if( keyHistory != answerKey && graveyard.indexOf(letterSelected) >= 0) {
+//         lives--;
+//     }
+//     updateGame();
+// })

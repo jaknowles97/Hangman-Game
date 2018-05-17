@@ -1,0 +1,26 @@
+html {
+    height: 100%;
+}
+
+.letter-btn {
+    padding: 0;
+    margin: 1px;
+    height: 30px;
+    width: 30px;
+    
+}
+
+#btns {
+    display: table;
+    margin: 0 auto;
+    height: fit-content;
+    align-items: center;
+}
+
+.example {
+    display: block;
+    margin: 0 auto;
+    height: 300px;
+    width: 300px;
+    background-color: gray;
+}
