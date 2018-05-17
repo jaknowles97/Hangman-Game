@@ -1,53 +1,52 @@
- const wordList = ["Devin", "car", "bat", "andrew", "knowles", "john", "sergio", "jeff"];
- const graveyard = [];
- const answerKey = [];
- let currentWord;
- let lettersRemaining;
- let lives = 10;
- let letterSelected = "";
+const wordList = ["Devin", "car", "bat", "andrew", "knowles", "john", "sergio", "jeff"];
+const graveyard = [];
+const answerKey = [];
+let currentWord;
+let lettersRemaining;
+let lives = 10;
+let letterSelected = "";
 
- function startGame() {
+startGame();  // Entry point of the game cycle
+
+function startGame() { 
+    // reset globals that kept track of progress and lives
     letterSelected = "";
     graveyard.length = 0;
     answerKey.length = 0;
     lives = 10;
 
 
-    function getRandWord() {
-        currentWord = wordList[Math.floor(Math.random() * wordList.length)];
-        console.log(currentWord);
-        lettersRemaining = currentWord.length;
-
-        for(let i = 0; i < currentWord.length; i++) {
-            answerKey[i] = "_";
-        }
-        updateGame();
-    }
-    console.log("game started!");
-    getRandWord();
-
-    
+    getRandWord(); 
 }
 
-startGame();
+function getRandWord() {
+    currentWord = wordList[Math.floor(Math.random() * wordList.length)];
+    console.log(currentWord);
+    lettersRemaining = currentWord.length;
+
+    for(let i = 0; i < currentWord.length; i++) {
+        answerKey[i] = "_";
+    }
 
 
-function updateGame() {
-    if(lettersRemaining <= 0 && lives > 0 ) {
+    updateScreen();
+}
+
+// Give the player some feedback on his current progress in the game.
+function updateScreen() {
+    if(lettersRemaining <= 0 && lives > 0 ) { // Win case
         var winHtml =
         '<h1 class="display-3 text-center"> Woot! You won!!</h1>'+
         '<h2 class="display-4 text-center"> The word was: '+currentWord+'</h2>'+
         '<button class="btn btn-dark justify-content-center reset" onclick="startGame()">Play Again</button>';
         document.querySelector("#game").innerHTML = winHtml;
-        // var playAgain = document.querySelector(".reset");
-        // playAgain.addEventListener("click", startGame, false);        
-    }else if (lettersRemaining > 0 && lives <= 0) {
+    } else if (lettersRemaining > 0 && lives <= 0) { // Lose case
         var winHtml =
         '<h1 class="display-3 text-center"> Shoot! You lost!!<h1>'+
         '<h2 class="display-4 text-center"> The word was: '+currentWord+'<h2>'+
         '<button class="btn btn-dark" onclick="startGame()"> Play Again </button>';
         document.querySelector("#game").innerHTML = winHtml;
-    } else {
+    } else { // the game must go on!!!
         var updateHtml =
         "<h3>word: " + answerKey.join(" ")  + "</p>" +
         "<h3>graveyard: " + graveyard + "</p>" +
@@ -57,14 +56,19 @@ function updateGame() {
    var keyHistory = answerKey;
 }
 
-
-
+// keyboard input
 document.onkeyup = function(event){
     letterSelected = event.key;
+
+
+    updateGame();
+};
+
+const updateGame = () => {
     var keyHistory;
-        //check to see if char is part of current word
+    //check to see if char is part of current word
     for(var j = 0; j < currentWord.length; j++) {
-        if(currentWord[j] == letterSelected) {
+        if(currentWord[j] === letterSelected.toLowerCase()) {
             answerKey[j] = letterSelected;
             lettersRemaining--;
             keyHistory = answerKey;
@@ -78,53 +82,30 @@ document.onkeyup = function(event){
     if( keyHistory != answerKey && graveyard.indexOf(letterSelected) >= 0) {
         lives--;
     }
-    updateGame();
-};
+    updateScreen();
+}
 
 
-const alphabet = () => {
+// Button Generator and eventListener
+const alphabetGen = () => {
     let letterHTML = "";
     const letterArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-        // LetterClicked is defined here for easy ref.
-        const letterClicked = () => {
-            console.log(this.id);
-        }
+
     letterArr.forEach(letter => {
         const letterString = letter.toString();
         const letterBtn = document.createElement("button");
         letterBtn.innerHTML = letter;
         letterBtn.setAttribute("id", letter);
-        letterBtn.setAttribute("class", "btn btn-btn letter-btn");
+        letterBtn.setAttribute("class", "btn btn-dark letter-btn");
         document.querySelector("#btns").appendChild(letterBtn);
         letterBtn.addEventListener("click", function() {
             letterSelected = this.id;
-            console.log(this.id);
+            updateGame();
         })
     })
-
 }
-alphabet();
+
+alphabetGen();
 
 
 
-// letterBtn.addEventListener("click", function() {
-//     letterSelected = this.id;
-//     var keyHistory;
-//     //check to see if char is part of current word
-//     for(var j = 0; j < currentWord.length; j++) {
-//         if(currentWord[j] == letterSelected) {
-//             answerKey[j] = letterSelected;
-//             lettersRemaining--;
-//             keyHistory = answerKey;
-//         }
-//     }
-//     if( graveyard.indexOf(letterSelected) < 0)   {
-//         graveyard.push(letterSelected);
-//     } else {
-//         letterSelected = "already used letter";
-//     }
-//     if( keyHistory != answerKey && graveyard.indexOf(letterSelected) >= 0) {
-//         lives--;
-//     }
-//     updateGame();
-// })
