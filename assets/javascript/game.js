@@ -3,8 +3,8 @@ const graveyard = [];
 const answerKey = [];
 let currentWord;
 let lettersRemaining;
-let lives = 10;
-let letterSelected = "";
+let lives;
+let letterSelected;
 
 startGame();  // Entry point of the game cycle
 
@@ -13,7 +13,7 @@ function startGame() {
     letterSelected = "";
     graveyard.length = 0;
     answerKey.length = 0;
-    lives = 10;
+    lives = 5;
 
 
     getRandWord(); 
@@ -36,20 +36,20 @@ function getRandWord() {
 function updateScreen() {
     if(lettersRemaining <= 0 && lives > 0 ) { // Win case
         var winHtml =
-        '<h1 class="display-3 text-center"> Woot! You won!!</h1>'+
-        '<h2 class="display-4 text-center"> The word was: '+currentWord+'</h2>'+
+        '<h1 class="display-5 text-center"> Woot! You won!!</h1>'+
+        '<h2 class="display-6 text-center"> The word was: '+currentWord+'</h2>'+
         '<button class="btn btn-dark justify-content-center reset" onclick="startGame()">Play Again</button>';
         document.querySelector("#game").innerHTML = winHtml;
     } else if (lettersRemaining > 0 && lives <= 0) { // Lose case
         var winHtml =
-        '<h1 class="display-3 text-center"> Shoot! You lost!!<h1>'+
-        '<h2 class="display-4 text-center"> The word was: '+currentWord+'<h2>'+
+        '<h1 class="display-5 text-center"> Shoot! You lost!!<h1>'+
+        '<h2 class="display-6 text-center"> The word was: '+currentWord+'<h2>'+
         '<button class="btn btn-dark" onclick="startGame()"> Play Again </button>';
         document.querySelector("#game").innerHTML = winHtml;
     } else { // the game must go on!!!
         var updateHtml =
-        "<h3>word: " + answerKey.join(" ")  + "</p>" +
-        "<h3>graveyard: " + graveyard + "</p>" +
+        "<h2>word: " + answerKey.join(" ")  + "</h2>" +
+        "<h2>graveyard: " + graveyard + "</h2>" +
         "<h3>lives: " + lives + "</h3>";
         document.querySelector("#game").innerHTML = updateHtml;
     }

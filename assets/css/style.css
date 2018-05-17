@@ -1,13 +1,25 @@
-html {
+html, body {
     height: 100%;
+    background-color: #507dbc; 
+}
+ 
+a {
+    text-decoration: none;
+}
+
+.header {
+    font-weight: 500;
+    background-color: #858ae3;
+    height: fit-content;
+    padding: 1rem;
+    box-shadow: 0 0 5px black;
 }
 
 .letter-btn {
     padding: 0;
     margin: 1px;
-    height: 30px;
-    width: 30px;
-    
+    height: 42px;
+    width: 42px;
 }
 
 #btns {
@@ -17,10 +29,28 @@ html {
     align-items: center;
 }
 
-.example {
-    display: block;
-    margin: 0 auto;
-    height: 300px;
-    width: 300px;
-    background-color: gray;
+#game {
+    display: table;
+    font-size: 42px;
+    margin: 2rem auto;
+}
+
+footer {
+    background-color: #858ae3;;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+}
+
+.signature {
+    margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+    .letter-btn {
+        height: 80px;
+        width: 80px;
+        font-size: 2rem;
+        margin: 5px;
+    }
 }
