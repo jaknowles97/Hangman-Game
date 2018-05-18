@@ -1,7 +1,4 @@
-html, body {
-    height: 100%;
-    background-color: #507dbc; 
-}
+
  
 a {
     text-decoration: none;
@@ -38,7 +35,7 @@ a {
 footer {
     background-color: #858ae3;;
     height: 100px;
-    position: relative;
+    /* position: relative; */
     bottom: 0;
 }
 
@@ -46,11 +43,6 @@ footer {
     margin-top: 40px;
 }
 
-@media (min-width: 350px) {
-    footer {
-        position: absolute;
-    }
-}
 
 @media (min-width: 600px) {
     .letter-btn {
@@ -58,5 +50,11 @@ footer {
         width: 80px;
         font-size: 2rem;
         margin: 5px;
+    }
+}
+
+@media (min-height: 740px) {
+    footer {
+         position: absolute; 
     }
 }
