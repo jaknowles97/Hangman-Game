@@ -1,4 +1,4 @@
-const wordList = ["Devin", "car", "bat", "andrew", "knowles", "john", "sergio", "jeff"];
+const wordList = ["javascript", "css", "html", "margin", "padding", "variable", "loop", "node", "ajax", "api", "string", "interger", "algorithim"];
 const graveyard = [];
 const answerKey = [];
 let currentWord;
