@@ -38,7 +38,7 @@ a {
 footer {
     background-color: #858ae3;;
     height: 100px;
-    position: absolute;
+    position: relative;
     bottom: 0;
 }
 
@@ -46,7 +46,13 @@ footer {
     margin-top: 40px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 350px) {
+    footer {
+        position: absolute;
+    }
+}
+
+@media (min-width: 600px) {
     .letter-btn {
         height: 80px;
         width: 80px;
